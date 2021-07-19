@@ -1,0 +1,21 @@
+Duration = 16;
+local LocalP = game.Players.LocalPlayer
+local mouse = LocalP:GetMouse()
+local rightclickdown = false
+mouse.Button2Down:Connect(function()
+    rightclickdown = true
+    local donemouse = false
+    if mouse.Target ~= nil then
+        if mouse.Target:FindFirstAncestor("Door") then
+            local door = mouse.Target:FindFirstAncestor("Door")
+            if door:FindFirstChild("Lock") and LocalP:DistanceFromCharacter(mouse.Target.CFrame.p) < 10 then
+                if door:FindFirstChild("Lock"):FindFirstChild("ClickDetector") then
+                    if door:FindFirstChild("Lock"):FindFirstChild("ClickDetector"):FindFirstChild("RemoteEvent") then
+                        door:FindFirstChild("Lock"):FindFirstChild("ClickDetector"):FindFirstChild("RemoteEvent"):FireServer()
+                        donemouse = true
+                    end
+                end
+            end
+        end
+    end
+end)

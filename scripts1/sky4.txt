@@ -1,0 +1,28 @@
+rpm = 1
+game:GetService('RunService').RenderStepped:connect(function()
+    --[[for i=1,math.ceil((rpm/60)/60) do]] -- not needed :shrug:
+        game.Lighting.TimeOfDay = "14:00:00" -- makes it day all the time
+    end)
+--[[end)]]
+function notify(NTitle, NText, NIcon, NDurFation)
+    game.StarterGui:SetCore("SendNotification",{
+		Title = NTitle;
+		Text = NText;
+		Icon = NIcon;
+		Duration = NDuration;
+	})
+ end
+notify("fourteen/scars", "4k Sky has been applied", "", "3")
+local lighting = game.Lighting
+local sunray = Instance.new("SunRaysEffect", lighting)
+local sky = lighting.Sky
+sky.SkyboxBk = "rbxassetid://653719502"
+sky.SkyboxDn = "rbxassetid://653718790"
+sky.SkyboxFt = "rbxassetid://653719067"
+sky.SkyboxLf = "rbxassetid://653719190"
+sky.SkyboxRt = "rbxassetid://653718931"
+sky.SkyboxUp = "rbxassetid://653719321"
+
+sky.StarCount = 1334
+sky.SunAngularSize = 21
+sky.MoonAngularSize = 11

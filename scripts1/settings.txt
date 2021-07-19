@@ -1,0 +1,399 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local GlockLaunchFix = Instance.new("TextButton")
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(102, 102, 102)
+Frame.BackgroundTransparency = 1
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 2
+Frame.Position = UDim2.new(0.423320651, 0, 0.741550624, 0)
+Frame.Size = UDim2.new(0, 171, 0, 60)
+Frame.Draggable = true
+
+GlockLaunchFix.Name = "GlockLaunchFix"
+GlockLaunchFix.Parent = Frame
+GlockLaunchFix.BackgroundColor3 = Color3.fromRGB(85, 170, 255)
+GlockLaunchFix.BackgroundTransparency = 0.400
+GlockLaunchFix.BorderSizePixel = 2
+GlockLaunchFix.Position = UDim2.new(0.0350877196, 0, 0.550000012, 0)
+GlockLaunchFix.Size = UDim2.new(0, 141, 0, 19)
+GlockLaunchFix.Font = Enum.Font.Gotham
+GlockLaunchFix.Text = "GLOCK LAUNCH"
+GlockLaunchFix.TextColor3 = Color3.fromRGB(0, 0, 0)
+GlockLaunchFix.TextSize = 14.000
+GlockLaunchFix.MouseButton1Down:connect(function()
+game.Players.LocalPlayer.Backpack.Glock.Barrel.CanCollide=true
+end)
+
+ function onKeyPress(inputObject, gameProcessedEvent)
+    if gameProcessedEvent == false then
+        if inputObject.KeyCode == Enum.KeyCode.R then
+            game.Players.LocalPlayer.Character:BreakJoints()
+        end
+    end
+end
+
+ local player = game.Players.LocalPlayer
+repeat wait() until player.Character.Humanoid
+local humanoid = player.Character.Humanoid
+local mouse = player:GetMouse()
+mouse.KeyDown:connect(function(key)
+  if key == "p" then
+game.Players.LocalPlayer.Character.Humanoid.Health = 0
+
+    end
+end)
+local Players, RService = game:GetService"Players", game:GetService"RunService";
+local Client, PGui, UD2 = Players.LocalPlayer, Players.LocalPlayer:WaitForChild"PlayerGui", UDim2.new;
+
+RService.RenderStepped:Connect(function()
+    if PGui and PGui:FindFirstChild"HUD" and PGui.HUD:FindFirstChild"Ammo" then 
+        local AmmoLabel, Tool = PGui.HUD.Ammo, Client.Character:FindFirstChildOfClass"Tool"
+        pcall(function()
+            if AmmoLabel then 
+                AmmoLabel.Text = (Tool:FindFirstChild"Ammo".Value.." Bullets  "..Tool:FindFirstChild"Clips".Value.." Clips")
+                AmmoLabel.Font = "Code"
+                AmmoLabel.Position = UD2(0.423320651, 0, 0.741550624, 0)
+            end
+        end)
+    end
+end)
+game:GetService("StarterGui"):SetCore('ChatWindowPosition', UDim2.new(0.7, 0, 0.7, 0))
+
+local Players, SGui = game:GetService("Players"), game:GetService("StarterGui");
+local Client, NColor3, UD, UD2 = Players.LocalPlayer, Color3.new, UDim.new, UDim2.new
+
+local function ChatSpy()
+   local ChatSpyFrame = Client.PlayerGui.Chat.Frame
+   ChatSpyFrame.ChatChannelParentFrame.Visible = true
+   ChatSpyFrame.ChatBarParentFrame.Position = ChatSpyFrame.ChatChannelParentFrame.Position + UD2(UD(), ChatSpyFrame.ChatChannelParentFrame.Size.Y)
+end -- brings back chat for games that remove it
+ChatSpy()
+
+getgenv().ShowHiddenMsg = function(T, C)
+   SGui:SetCore("ChatMakeSystemMessage", {
+       Text = T;
+       Color = C;
+   })
+end
+getgenv().Spy = function(Target)
+   Target.Chatted:Connect(function(Msg)
+       if string.find(Msg, "/e ") or string.find(Msg, "/w ") or string.find(Msg, "/whisper ") then
+           ShowHiddenMsg("".."["..tostring(Target).."]: "..Msg, NColor3(255,255,255)) -- https://www.rapidtables.com/web/color/RGB_Color.html if you want to change the color of the hidden msg's
+       end
+   end)
+end
+
+local GP = Players:GetPlayers()
+for i = 1, #GP do
+   local Plr = GP[i]
+   if tostring(Plr) then
+       Spy(Plr)
+   end
+end
+Players.PlayerAdded:Connect(function(P)
+   if tostring(P) then
+       Spy(P)
+   end
+end)
+
+local VirtualUser=game:service'VirtualUser'
+game:service'Players'.LocalPlayer.Idled:connect(function()
+VirtualUser:CaptureController()
+VirtualUser:ClickButton2(Vector2.new())
+end)
+
+function onKeyPress(inputObject, gameProcessedEvent)
+    if gameProcessedEvent == false then
+        if inputObject.KeyCode == Enum.KeyCode.P then
+            game.Players.LocalPlayer.Character:BreakJoints()
+        end
+    end
+end
+
+game:GetService("UserInputService").InputBegan:connect(onKeyPress)
+
+Duration = 16;
+local LocalP = game.Players.LocalPlayer
+local mouse = LocalP:GetMouse()
+local rightclickdown = false
+mouse.Button2Down:Connect(function()
+    rightclickdown = true
+    local donemouse = false
+    if mouse.Target ~= nil then
+        if mouse.Target:FindFirstAncestor("Door") then
+            local door = mouse.Target:FindFirstAncestor("Door")
+            if door:FindFirstChild("Lock") and LocalP:DistanceFromCharacter(mouse.Target.CFrame.p) < 10 then
+                if door:FindFirstChild("Lock"):FindFirstChild("ClickDetector") then
+                    if door:FindFirstChild("Lock"):FindFirstChild("ClickDetector"):FindFirstChild("RemoteEvent") then
+                        door:FindFirstChild("Lock"):FindFirstChild("ClickDetector"):FindFirstChild("RemoteEvent"):FireServer()
+                        donemouse = true
+                    end
+                end
+            end
+        end
+    end
+end)
+
+local lp = game.Players.LocalPlayer
+local lpimage = game.Players:GetUserThumbnailAsync(lp.UserId, Enum.ThumbnailType.AvatarBust, Enum.ThumbnailSize.Size420x420)
+local mouse = lp:GetMouse()
+local rservice = game:GetService("RunService")
+local prefix = "."
+local resetkey = "r"
+local infstam = true
+local ac = false
+local noclip = false
+
+local meta = getrawmetatable(game)
+local caller = checkcaller or is_protosmasher_caller
+local newindex = meta.__newindex
+setreadonly(meta, false)
+meta.__newindex =
+    newcclosure(
+    function(self, meme, value)
+        if caller() then
+            return newindex(self, meme, value)
+        end
+        if tostring(self) == "HumanoidRootPart" or tostring(self) == "Torso" then
+            if meme == "CFrame" or meme == "Position" or meme == "Velocity" then
+                return true
+            end
+        end
+        return newindex(self, meme, value)
+    end
+)
+setreadonly(meta, true)
+
+function esp(player)
+    if player.Name ~= lp.Name then
+        local bbg = Instance.new("BillboardGui", game.CoreGui)
+        bbg.Name = player.Name
+        bbg.AlwaysOnTop = true
+        bbg.Enabled = true
+        bbg.Size = UDim2.new(1, 0, 1, 0)
+        bbg.StudsOffset = Vector3.new(0, 2, 0)
+        local tlabel = Instance.new("TextLabel", bbg)
+        tlabel.BackgroundTransparency = 1
+        tlabel.Size = UDim2.new(1, 0, 1, 0)
+        tlabel.Text = player.Name
+        tlabel.TextColor3 = Color3.new(255, 255, 255)
+        game.Players.PlayerRemoving:Connect(
+            function(plrr)
+                if plrr == player then
+                    game.CoreGui:FindFirstChild(plrr.Name):Destroy()
+                end
+            end
+        )
+    end
+end
+
+lp.PlayerGui.Chat.Frame.ChatChannelParentFrame.Visible = true
+lp.PlayerGui.Chat.Frame.ChatBarParentFrame.Position = lp.PlayerGui.Chat.Frame.ChatChannelParentFrame.Position + UDim2.new(UDim.new(), lp.PlayerGui.Chat.Frame.ChatChannelParentFrame.Size.Y)
+
+function notif(title, msg, dur)
+    game:GetService("StarterGui"):SetCore(
+        "SendNotification",
+        {
+            ["Icon"] = lpimage,
+            ["Title"] = title,
+            ["Text"] = msg,
+            ["Duration"] = dur
+        }
+    )
+end
+
+function infstam()
+    wait(0.5)
+    if game.PlaceId ~= 455366377 then
+        lp.Backpack.ServerTraits.Stann.Changed:Connect(
+            function()
+                if infstam then
+                    lp.Backpack.ServerTraits.Stann.Value = 100
+                end
+            end
+        )
+    else
+        lp.Character.Stamina.Changed:Connect(
+            function()
+                if infstam then
+                    lp.Character.Stamina.Value = 100
+                end
+            end
+        )
+    end
+end
+function anticlaim()
+    local myTools = {}
+    for _, z in pairs(lp.Backpack:GetChildren()) do
+        if z:IsA "Tool" then
+            table.insert(myTools, z)
+        end
+    end
+    lp.Character.ChildAdded:Connect(
+        function(instance)
+            if ac then
+                if instance.Name ~= "nillingprocessigbecausethisisalongnameeitherwaystillworks" and instance:IsA "Tool" then
+                    instance:Destroy()
+                    wait(0.1)
+                    instance:Destroy()
+                end
+            end
+        end
+    )
+    lp.Backpack.ChildRemoved:Connect(
+        function(instance)
+            local toolnames_ = {}
+            table.insert(toolnames_, instance.Name)
+            instance.Name = "nillingprocessigbecausethisisalongnameeitherwaystillworks"
+            wait()
+            instance.Name = toolnames_[1]
+        end
+    )
+end
+
+infstam()
+anticlaim()
+
+lp.CharacterAdded:Connect(
+    function()
+        infstam()
+        anticlaim()
+    end
+)
+
+mouse.KeyDown:Connect(
+    function(key)
+        if key == resetkey then
+            lp.Character.Humanoid:ChangeState(15)
+        end
+    end
+)
+
+lp.Chatted:Connect(
+    function(Message)
+        local args = string.split(Message, " ")
+        if args[1] == prefix .. "view" then
+            if args[2] and args[2] ~= "" or " " then end
+            local Targ = GetPlayer(tostring(args[2]))
+            Workspace.CurrentCamera.CameraSubject = Targ.Character.Humanoid
+            notif("View", "Now Viewing" .. Targ.Name, 2)
+        end
+        if args[1] == prefix .. "unview" then
+            Workspace.CurrentCamera.CameraSubject = lp.Character.Humanoid
+            notif("UnView", "Unviewed", 2)
+        end
+        if args[1] == prefix .. "reset" then
+            lp.Character.Humanoid:ChangeState(15)
+        end
+        if args[1] == prefix .. "prefix" then
+            if args[2] and args[2] ~= "" or " " then end
+            prefix = args[2]
+        end
+        if args[1] == prefix .. "esp" then
+            if args[2] and args[2] ~= "" or " " then end
+            local plYer = GetPlayer(tostring(args[2]))
+            esp(plYer)
+            notif("Revealed", plYer.Name, 2)
+        end
+        if args[1] == prefix .. "unesp" then
+            if args[2] and args[2] ~= "" or " " then end
+            local plYer = GetPlayer(tostring(args[2]))
+            if game.CoreGui:FindFirstChild(plYer.Name) then
+                game.CoreGui:FindFirstChild(plYer.Name):Destroy()
+            else
+                notif("Cannot UnEsp", plYer.Name, 2)
+            end
+        end
+        if args[1] == prefix .. "fov" then
+            if args[2] and args[2] ~= "" or " " then end
+            Workspace.CurrentCamera.FieldOfView = tonumber(args[2])
+            notif("FieldOfView", "Changed To" .. " " .. tonumber(args[2]), 2)
+        end
+        if args[1] == prefix .. "infstam" then
+            infstam = not infstam
+            if infstam then
+                notif("Infinite Stamina", "Turned To True", 2)
+            else
+                notif("Infinite Stamina", "Turned To False", 2)
+            end
+        end
+        if args[1] == prefix .. "anticlaim" then
+            ac = not ac
+            if ac then
+                notif("Anti - Claim", "Turned To True", 2)
+            else
+                notif("Anti - Claim", "Turned To False", 2)
+            end
+        end
+        if args[1] == prefix .. "noclip" then
+            noclip = not noclip
+            if noclip then
+                notif("Noclip", "Turned To True", 2)
+            else
+                notif("Noclip", "Turned To False", 2)
+            end
+        end
+        if args[1] == prefix .. "rseats" then
+            for _,z in pairs(game:GetDescendants()) do
+                if z:IsA'Seat' then
+                    z:Destroy()
+                end
+            end
+        end
+    end
+)
+
+function GetPlayer(String)
+    local Targ
+    local StrLower = String:lower()
+    for _, z in pairs(game:GetService("Players"):GetPlayers()) do
+        if z.Name:lower():sub(1, #String) == String:lower() then
+            Targ = z
+        end
+    end
+    if String == "me" then
+        Targ = lp
+    end
+    if String == "" or String == " " then
+        Targ = nil
+    end
+    return Targ
+end
+
+for _, z in pairs(game:GetService("Lighting"):GetChildren()) do
+    z:Destroy()
+end
+
+rservice.Stepped:Connect(
+    function()
+        pcall(
+            function()
+                if noclip then
+                    for _, z in pairs(lp.Character:GetDescendants()) do
+                        if z:IsA "Part" then
+                            z.CanCollide = false
+                        end
+                    end
+                end
+                for _, z in pairs(game.CoreGui:GetChildren()) do
+                    if z:IsA "BillboardGui" then
+                        for _, v in pairs(game.Players:GetPlayers()) do
+                            if z.Name == v.Name then
+                                if v.Character and v.Character.Head and v.Character.Humanoid then
+                                    z.Adornee = v.Character.Head
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        )
+    end
+)
+
+

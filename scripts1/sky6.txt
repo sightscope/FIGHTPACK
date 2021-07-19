@@ -1,0 +1,32 @@
+game:GetService('RunService').RenderStepped:connect(function()
+    game.Lighting.TimeOfDay = "24:00:00"
+end)
+
+local lighting = game.Lighting
+        if lighting:FindFirstChild("ColorCorrection") then
+            lighting:FindFirstChild("ColorCorrection"):Remove()
+        end
+        if lighting:FindFirstChild("Correction") then
+            lighting:FindFirstChild("Correction"):Remove()
+        end
+        if lighting:FindFirstChildOfClass("SunRaysEffect") then
+            lighting:FindFirstChildOfClass("SunRaysEffect"):Remove()
+        end
+
+        local sunray = Instance.new("SunRaysEffect", lighting)
+        local sky = lighting.Sky
+        sky.SkyboxBk = "6660661231"
+        sky.SkyboxDn = "6660663119"
+        sky.SkyboxFt = "6660666411"
+        sky.SkyboxLf = "6660667993"
+        sky.SkyboxRt = "6660670119"
+        sky.SkyboxUp = "6660671907"
+
+        sky.StarCount = 3000
+        sky.SunAngularSize = 21
+        sky.MoonAngularSize = 11
+
+        local correction = Instance.new("ColorCorrectionEffect", lighting)
+        correction.Name = "Correction"
+        correction.Saturation = -0.4
+        correction.TintColor = Color3.fromRGB(100, 200, 255)

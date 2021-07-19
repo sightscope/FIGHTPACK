@@ -1,0 +1,27 @@
+rpm = 1
+game:GetService('RunService').RenderStepped:connect(function()
+    --[[for i=1,math.ceil((rpm/60)/60) do]] -- not needed :shrug:
+        game.Lighting.TimeOfDay = "14:00:00" -- makes it day all the time
+    end)
+--[[end)]]
+function notify(NTitle, NText, NIcon, NDurFation)
+    game.StarterGui:SetCore("SendNotification",{
+		Title = NTitle;
+		Text = NText;
+		Icon = NIcon;
+		Duration = NDuration;
+	})
+ end
+notify("fourteen/scars", "PinkSky has been applied", "", "3")
+local lighting = game.Lighting
+local sunray = Instance.new("SunRaysEffect", lighting)
+local sky = lighting.Sky
+sky.SkyboxBk = "http://www.roblox.com/asset/?id=271042516"
+sky.SkyboxDn = "http://www.roblox.com/asset/?id=271077243"
+sky.SkyboxFt = "http://www.roblox.com/asset/?id=271042556"
+sky.SkyboxLf = "http://www.roblox.com/asset/?id=271042310"
+sky.SkyboxRt = "http://www.roblox.com/asset/?id=271042467"
+sky.SkyboxUp = "http://www.roblox.com/asset/?id=271077958"
+sky.StarCount = 1334
+sky.SunAngularSize = 21
+sky.MoonAngularSize = 11

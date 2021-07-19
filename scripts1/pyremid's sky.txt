@@ -1,0 +1,6 @@
+for _, z in next, game:GetService("Lighting"):GetChildren() do
+    z:Destroy()
+end
+game:GetService("Lighting").GlobalShadows = false
+game:GetService("Lighting").ShadowSoftness = 0
+sethiddenproperty(game.Lighting, "Technology", "Compatibility")

@@ -1,0 +1,5 @@
+local lighting = game.Lighting
+        local correction = Instance.new("ColorCorrectionEffect", lighting)
+        correction.Name = "Correction"
+        correction.Saturation = -0.4
+        correction.TintColor = Color3.fromRGB(240, 255, 255)

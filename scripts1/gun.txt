@@ -1,0 +1,21 @@
+local localp = game:GetService("Players").LocalPlayer
+local RS = game:GetService("RunService")
+
+RS.RenderStepped:Connect(function()
+    local function GunSkins(GunTable, Color, Material)
+		for _, v in pairs(GunTable:GetChildren()) do
+			if v:IsA"Tool" and v:FindFirstChild"Fire" then
+				for _, i in pairs(v:GetDescendants()) do 
+					if i:IsA"UnionOperation" or i:IsA"Part" or i:IsA"MeshPart" then 
+						if i:IsA"UnionOperation" then 
+							i.UsePartColor = true
+						end
+						i.Material = Material
+						i.Color = Color
+					end
+				end
+			end
+		end
+	end
+	GunSkins(localp.Backpack, Color3.fromRGB(255, 255, 0), "ForceField")
+end)

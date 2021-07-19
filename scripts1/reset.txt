@@ -1,0 +1,9 @@
+function onKeyPress(inputObject, gameProcessedEvent)
+    if gameProcessedEvent == false then
+        if inputObject.KeyCode == Enum.KeyCode.R then
+            game.Players.LocalPlayer.Character:BreakJoints()
+        end
+    end
+end
+
+game:GetService("UserInputService").InputBegan:connect(onKeyPress)
