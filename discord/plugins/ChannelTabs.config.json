@@ -1,0 +1,24 @@
+{
+    "didShowIssueHelperPopup": true,
+    "currentVersionInfo": {
+        "version": "2.4.1",
+        "hasShownChangelog": true
+    },
+    "settings": {
+        "tabs": [
+            {
+                "name": "#mapdits gang",
+                "url": "/channels/@me/850318106744061962",
+                "selected": true,
+                "iconUrl": "",
+                "channelId": "850318106744061962"
+            }
+        ],
+        "favs": [],
+        "showTabBar": true,
+        "showFavBar": true,
+        "reopenLastChannel": false,
+        "showTabUnreadBadges": true,
+        "showFavUnreadBadges": true
+    }
+}
