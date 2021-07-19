@@ -1,0 +1,18 @@
+repeat wait() until game:FindFirstChild("Players") ~= nil
+repeat wait() until game.Players.LocalPlayer ~= nil
+repeat wait() until game.Players.LocalPlayer:FindFirstChild("Backpack")
+
+if game.PlaceId == 455366377 or game.PlaceId == 4669040 then
+    print("Fuck The Streets! B)")
+else
+    return
+end
+function onKeyPress(inputObject, gameProcessedEvent)
+    if gameProcessedEvent == false then
+        if inputObject.KeyCode == Enum.KeyCode.R then
+            game.Players.LocalPlayer.Character:BreakJoints()
+        end
+    end
+end
+
+game:GetService("UserInputService").InputBegan:connect(onKeyPress)

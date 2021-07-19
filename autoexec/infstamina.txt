@@ -1,0 +1,21 @@
+repeat wait() until game:FindFirstChild("Players") ~= nil
+repeat wait() until game.Players.LocalPlayer ~= nil
+repeat wait() until game.Players.LocalPlayer:FindFirstChild("Backpack")
+
+if game.PlaceId == 455366377 or game.PlaceId == 4669040 then
+    print("Fuck The Streets! B)")
+else
+    return
+end
+local LocalP = game.Players.LocalPlayer
+
+LocalP.Character.Stamina.Changed:Connect(function()
+    LocalP.Character:WaitForChild"Stamina"
+    LocalP.Character.Stamina.Value = 100 
+end)
+LocalP.CharacterAdded:Connect(function()
+    LocalP.Character:WaitForChild"Stamina"
+    LocalP.Character.Stamina.Changed:Connect(function()
+        LocalP.Character.Stamina.Value = 100 
+    end)
+end)
